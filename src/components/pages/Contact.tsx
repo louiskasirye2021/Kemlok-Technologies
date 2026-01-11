@@ -349,7 +349,7 @@ export function Contact() {
                     },
                     {
                       title: 'Proven Track Record',
-                      description: '500+ successful projects delivered to satisfied clients.',
+                      description: '10+ successful projects delivered to satisfied clients.',
                     },
                   ].map((item, index) => (
                     <motion.div
