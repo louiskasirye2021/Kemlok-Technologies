@@ -1,243 +1,296 @@
-import { ArrowRight, Sparkles, Zap, Target } from 'lucide-react';
-import { Button } from '../ui/button';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { ArrowRight, ExternalLink } from 'lucide-react';
+import { ButtonLink, CtaBand, Glow, ProcessSteps, SectionHeading, usePageMeta } from '../kit';
+import { ease, fadeUp, onMount, onScroll, Reveal, stagger, WordReveal } from '../motion';
+import { services } from '../../services';
+import { clients, projects, site, testimonials, type Client } from '../../site';
 
-interface HomeProps {
-  setCurrentPage?: (page: string) => void;
-}
-
-export function Home({ setCurrentPage }: HomeProps) {
-  const features = [
-    {
-      icon: Sparkles,
-      title: 'AI-Powered',
-      description: 'Cutting-edge AI solutions for modern businesses',
-    },
-    {
-      icon: Zap,
-      title: 'Lightning Fast',
-      description: 'Optimized performance and rapid delivery',
-    },
-    {
-      icon: Target,
-      title: 'Precision Design',
-      description: 'Pixel-perfect execution every time',
-    },
-  ];
-
-  const handleNavigation = (page: string) => {
-    if (setCurrentPage) {
-      setCurrentPage(page);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
+export function Home() {
+  usePageMeta(
+    site.name,
+    'Kampala software and digital studio: websites, booking systems, dashboards, branding and digital marketing for Ugandan businesses.',
+  );
 
   return (
-    <div className="pt-20">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Animated Geometric Background */}
-        <div className="absolute inset-0 pointer-events-none">
-          <motion.div
-            className="absolute top-20 left-10 w-64 h-64 border border-white/10 rounded-full"
-            animate={{
-              scale: [1, 1.2, 1],
-              rotate: [0, 180, 360],
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-          />
-          <motion.div
-            className="absolute bottom-20 right-10 w-96 h-96 border border-white/5"
-            animate={{
-              rotate: [0, 90, 180, 270, 360],
-            }}
-            transition={{
-              duration: 30,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-          />
-          <motion.div
-            className="absolute top-1/2 left-1/2 w-[600px] h-[600px] border border-white/5 rounded-full"
-            style={{ x: '-50%', y: '-50%' }}
-            animate={{
-              scale: [1, 1.1, 1],
-            }}
-            transition={{
-              duration: 15,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-          />
-        </div>
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <motion.div
-              className="inline-block mb-6 px-4 py-2 border border-white/20 rounded-full"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 }}
-            >
-              <span className="text-sm tracking-widest">KEMLOK TECHNOLOGIES</span>
-            </motion.div>
-
-            <motion.h1
-              className="mb-6 tracking-tight max-w-5xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              <span className="block text-5xl md:text-7xl">
-                Turning your vision into
-              </span>
-              <span className="block text-5xl md:text-7xl">
-                intelligent solutions
-              </span>
-            </motion.h1>
-
-            <motion.p
-              className="text-xl md:text-2xl text-white/60 mb-12 max-w-2xl mx-auto"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-            >
-              Next-gen solutions that blend technology, design, and innovation
+    <>
+      {/* Hero */}
+      <section className="relative overflow-hidden">
+        <Glow />
+        <div className="container-page relative grid grid-cols-1 items-center gap-14 py-20 sm:py-28 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
+          <motion.div className="flex flex-col gap-7" variants={stagger(0.12)} {...onMount}>
+            <motion.p className="eyebrow" variants={fadeUp}>
+              Software &amp; digital studio · Kampala, Uganda
             </motion.p>
-
-            <motion.div
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 }}
+            <h1 className="m-0 text-[40px] leading-[1.05] font-semibold tracking-tight sm:text-6xl">
+              <WordReveal text="Websites, systems and digital marketing for Ugandan businesses." delay={0.15} />
+            </h1>
+            <motion.p
+              className="m-0 max-w-xl text-lg leading-relaxed text-muted sm:text-[19px]"
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease, delay: 0.7 } } }}
             >
-              <Button
-                size="lg"
-                className="bg-white text-black hover:bg-white/90 group px-8 py-6"
-                onClick={() => handleNavigation('contact')}
-              >
-                Get Started
-                <motion.span
-                  className="ml-2"
-                  animate={{ x: [0, 5, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
+              We design and build the tools that run your business online — booking systems, dashboards, websites and
+              brand identity — and we support them after launch.
+            </motion.p>
+            <motion.div
+              className="flex flex-wrap gap-3"
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease, delay: 0.85 } } }}
+            >
+              <ButtonLink to="/contact" arrow>
+                Book a free consultation
+              </ButtonLink>
+              <ButtonLink to="/#work" variant="outline">
+                See our work
+              </ButtonLink>
+            </motion.div>
+          </motion.div>
+
+          {/* At-a-glance panel listing the services */}
+          <motion.div
+            className="rounded-xl border border-line-strong bg-ink-raised p-2 shadow-[0_30px_80px_-40px_rgba(255,255,255,0.15)]"
+            initial={{ opacity: 0, x: 60, rotate: 2 }}
+            animate={{ opacity: 1, x: 0, rotate: 0 }}
+            transition={{ duration: 0.9, ease, delay: 0.4 }}
+          >
+            <p className="eyebrow px-5 pt-4 pb-3 text-xs">What we build</p>
+            <motion.ul className="m-0 list-none p-0" variants={stagger(0.08, 0.7)} {...onMount}>
+              {services.map(({ id, title, icon: Icon, offerings }) => (
+                <motion.li key={id} variants={{ hidden: { opacity: 0, x: 24 }, visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease } } }}>
+                  <Link
+                    to={`/services#${id}`}
+                    className="group flex items-center gap-4 rounded-lg px-5 py-4 no-underline transition-colors hover:bg-panel"
+                  >
+                    <Icon
+                      size={22}
+                      strokeWidth={1.6}
+                      aria-hidden="true"
+                      className="shrink-0 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
+                    />
+                    <span className="flex min-w-0 flex-1 flex-col">
+                      <span className="font-display font-semibold">{title}</span>
+                      <span className="truncate text-sm text-subtle">{offerings.map((o) => o.name).join(' · ')}</span>
+                    </span>
+                    <ArrowRight
+                      size={18}
+                      aria-hidden="true"
+                      className="shrink-0 text-faint transition-transform duration-300 group-hover:translate-x-1 group-hover:text-fg"
+                    />
+                  </Link>
+                </motion.li>
+              ))}
+            </motion.ul>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Client logos: shown once there are enough to look credible */}
+      {clients.length >= 3 && (
+        <section className="border-y border-line">
+          <div className="flex flex-col gap-6 py-10">
+            <Reveal className="container-page">
+              <p className="eyebrow text-[13px] text-faint">Clients we've worked with</p>
+            </Reveal>
+            <Reveal className="overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+              <div className="flex w-max animate-marquee hover:[animation-play-state:paused] motion-reduce:w-auto motion-reduce:animate-none motion-reduce:flex-wrap motion-reduce:justify-center">
+                <LogoList />
+                <LogoList hidden />
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      )}
+
+      {/* Services */}
+      <section className={clients.length >= 3 ? '' : 'border-t border-line'}>
+        <div className="container-page flex flex-col gap-12 py-24 sm:py-28">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <SectionHeading eyebrow="What we do" title="Five services, one team accountable for the result." />
+            <Reveal from="right">
+              <Link to="/services" className="group inline-flex min-h-11 items-center gap-2 font-medium">
+                All services{' '}
+                <ArrowRight size={18} aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
+            </Reveal>
+          </div>
+          <motion.div
+            className="grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3"
+            variants={stagger(0.08)}
+            {...onScroll}
+          >
+            {services.map(({ id, title, icon: Icon, short }) => (
+              <motion.div key={id} variants={fadeUp}>
+                <Link
+                  to={`/services#${id}`}
+                  className="group relative flex h-full flex-col gap-3.5 overflow-hidden bg-ink p-8 no-underline transition-colors duration-300 hover:bg-ink-raised sm:p-9"
                 >
-                  <ArrowRight size={20} />
-                </motion.span>
-              </Button>
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-white/20 hover:bg-white/10 px-8 py-6"
-                onClick={() => handleNavigation('services')}
-              >
-                View Services
-              </Button>
+                  <Icon
+                    size={28}
+                    strokeWidth={1.6}
+                    aria-hidden="true"
+                    className="transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6"
+                  />
+                  <h3 className="m-0 text-[22px] font-semibold">{title}</h3>
+                  <p className="m-0 leading-relaxed text-muted">{short}</p>
+                  <span className="mt-auto inline-flex items-center gap-2 pt-2 text-sm font-medium text-faint transition-colors group-hover:text-fg">
+                    Learn more
+                    <ArrowRight size={16} aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1" />
+                  </span>
+                </Link>
+              </motion.div>
+            ))}
+            <motion.div variants={fadeUp} className="flex flex-col justify-center gap-3.5 bg-panel p-8 sm:p-9">
+              <h3 className="m-0 text-[22px] font-semibold">Not sure where to start?</h3>
+              <p className="m-0 leading-relaxed text-muted">
+                A first call is free. We'll tell you honestly what you need — and what you don't.
+              </p>
+              <Link to="/contact" className="group inline-flex min-h-11 items-center gap-2 font-semibold">
+                Book a call{' '}
+                <ArrowRight size={18} aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1" />
+              </Link>
             </motion.div>
           </motion.div>
         </div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
-            <motion.div
-              className="w-1.5 h-1.5 bg-white rounded-full"
-              animate={{ y: [0, 16, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-          </div>
-        </motion.div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 relative">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl md:text-6xl mb-4 tracking-tight" style={{ fontFamily: 'Futura, Montserrat, sans-serif', fontWeight: 500, letterSpacing: '0.02em' }}>
-              Why Choose Us
-            </h2>
-            <div className="w-20 h-1 bg-white mx-auto" />
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
-              return (
+      {/* Selected work */}
+      <section id="work" className="on-paper scroll-mt-20 overflow-hidden bg-paper text-on-paper">
+        <div className="container-page flex flex-col gap-12 py-24 sm:py-28">
+          <SectionHeading eyebrow="Selected work" title="Recent projects" />
+          <div className={`grid grid-cols-1 gap-x-7 gap-y-14 md:grid-cols-2 ${projects.length % 3 === 0 ? 'lg:grid-cols-3' : ''}`}>
+            {projects.map((p, i) => (
+              <motion.article
+                key={p.client}
+                className="group flex flex-col gap-4"
+                variants={{
+                  hidden: { opacity: 0, y: 48 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease, delay: (i % 2) * 0.12 } },
+                }}
+                {...onScroll}
+              >
                 <motion.div
-                  key={index}
-                  className="relative group"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.2 }}
-                  whileHover={{ y: -10 }}
+                  className="overflow-hidden rounded-lg border border-on-paper/10 shadow-sm transition-shadow duration-500 group-hover:shadow-xl"
+                  whileHover={{ y: -6 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 24 }}
                 >
-                  <div className="border border-white/10 p-8 h-full relative overflow-hidden">
-                    {/* Hover Effect */}
-                    <motion.div
-                      className="absolute inset-0 bg-white"
-                      initial={{ x: '-100%' }}
-                      whileHover={{ x: 0 }}
-                      transition={{ duration: 0.3 }}
+                  {p.image ? (
+                    <img
+                      src={p.image}
+                      alt={`${p.client} project`}
+                      className="block aspect-[2/1] w-full object-cover object-left-top transition-transform duration-700 ease-out group-hover:scale-105"
+                      loading="lazy"
                     />
-
-                    <div className="relative z-10 group-hover:text-black transition-colors">
-                      <Icon size={40} className="mb-4" />
-                      <h3 className="text-2xl font-black mb-2">{feature.title}</h3>
-                      <p className="text-white/60 group-hover:text-black/60 transition-colors">
-                        {feature.description}
-                      </p>
+                  ) : p.logo ? (
+                    <div className="aspect-[2/1] min-h-0 px-10 py-8" style={{ backgroundColor: p.logo.background }}>
+                      <img
+                        src={p.logo.logo}
+                        alt={`${p.client} logo`}
+                        loading="lazy"
+                        className="block h-full w-full object-contain transition-transform duration-700 ease-out group-hover:scale-105"
+                      />
                     </div>
-                  </div>
+                  ) : (
+                    <div
+                      aria-hidden="true"
+                      className="flex aspect-[16/10] items-end bg-paper-deep p-6 font-display text-2xl leading-tight font-semibold text-on-paper-subtle"
+                    >
+                      {p.client}
+                    </div>
+                  )}
                 </motion.div>
-              );
-            })}
+                <p className="eyebrow text-[13px]">{p.type}</p>
+                <h3 className="m-0 text-[22px] font-semibold">{p.client}</h3>
+                <p className="m-0 leading-relaxed text-on-paper-muted">{p.summary}</p>
+                {p.url && (
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group/link inline-flex min-h-11 items-center gap-2 self-start font-semibold text-on-paper"
+                  >
+                    Visit site{' '}
+                    <ExternalLink
+                      size={16}
+                      aria-hidden="true"
+                      className="transition-transform duration-300 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5"
+                    />
+                  </a>
+                )}
+              </motion.article>
+            ))}
+            {projects.length < 3 && (
+              <Reveal className="flex flex-col justify-center gap-4 rounded-lg border border-on-paper/15 p-8">
+                <h3 className="m-0 text-[22px] font-semibold">Your project could be next.</h3>
+                <p className="m-0 leading-relaxed text-on-paper-muted">
+                  Tell us what you're working on and we'll show you how we'd approach it.
+                </p>
+                <Link to="/contact" className="inline-flex min-h-11 items-center gap-2 font-semibold text-on-paper">
+                  Start a conversation <ArrowRight size={18} aria-hidden="true" />
+                </Link>
+              </Reveal>
+            )}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 relative">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl md:text-6xl mb-6 tracking-tight" style={{ fontFamily: 'Futura, Montserrat, sans-serif', fontWeight: 500, letterSpacing: '0.02em' }}>
-              Ready To Build The Future?
-            </h2>
-            <p className="text-xl text-white/60 mb-8">
-              Let's create something extraordinary together
-            </p>
-            <Button
-              size="lg"
-              className="bg-white text-black hover:bg-white/90 px-12 py-6"
-              onClick={() => handleNavigation('contact')}
-            >
-              Start Your Project
-              <ArrowRight className="ml-2" size={20} />
-            </Button>
-          </motion.div>
+      {/* Process */}
+      <section>
+        <div className="container-page flex flex-col gap-12 py-24 sm:py-28">
+          <SectionHeading eyebrow="How we work" title="A clear process from first call to launch." />
+          <ProcessSteps />
         </div>
       </section>
-    </div>
+
+      {/* Testimonials: hidden until real quotes are added in src/site.ts */}
+      {testimonials.length > 0 && (
+        <section className="border-t border-line">
+          <motion.div className="container-page grid grid-cols-1 gap-8 py-24 md:grid-cols-2" variants={stagger(0.12)} {...onScroll}>
+            {testimonials.map((t) => (
+              <motion.figure
+                key={t.name}
+                variants={fadeUp}
+                className="m-0 flex flex-col gap-6 rounded-xl border border-line-strong p-9"
+              >
+                <blockquote className="m-0 font-display text-[22px] leading-normal">“{t.quote}”</blockquote>
+                <figcaption className="text-[15px] text-muted">
+                  {t.name}, {t.role} — {t.organisation}
+                </figcaption>
+              </motion.figure>
+            ))}
+          </motion.div>
+        </section>
+      )}
+
+      <CtaBand
+        title="Have a project in mind?"
+        text="Tell us what you need. We reply to every enquiry within 24 hours."
+        cta="Start a conversation"
+      />
+    </>
+  );
+}
+
+/** One copy of the client logos. The marquee shows two copies back to back so it loops seamlessly. */
+function LogoList({ hidden = false }: { hidden?: boolean }) {
+  return (
+    <ul
+      aria-hidden={hidden || undefined}
+      className={`m-0 flex list-none gap-3 p-0 pr-3 motion-reduce:flex-wrap motion-reduce:justify-center ${hidden ? 'motion-reduce:hidden' : ''}`}
+    >
+      {clients.map((c: Client) => (
+        <li
+          key={c.name}
+          className="flex h-28 w-44 shrink-0 items-center justify-center rounded-lg px-5 py-2.5 transition-transform duration-300 hover:-translate-y-1 hover:scale-105 sm:w-52"
+          style={{ backgroundColor: c.background }}
+        >
+          <img
+            src={c.logo}
+            alt={hidden ? '' : c.name}
+            title={c.name}
+            loading="lazy"
+            className="max-h-full max-w-full object-contain"
+          />
+        </li>
+      ))}
+    </ul>
   );
 }

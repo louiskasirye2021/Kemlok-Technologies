@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import logo from 'figma:asset/cc572572013fed7ea1d15352963344bd1131bddf.png';
@@ -79,6 +79,7 @@ export function Navigation({ currentPage, setCurrentPage }: NavigationProps) {
           {/* Mobile Menu Button */}
           <motion.button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             className="md:hidden p-2"
             whileTap={{ scale: 0.9 }}
           >
@@ -88,29 +89,31 @@ export function Navigation({ currentPage, setCurrentPage }: NavigationProps) {
       </div>
 
       {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 'auto' }}
-          exit={{ opacity: 0, height: 0 }}
-          className="md:hidden bg-black border-t border-white/10"
-        >
-          <div className="px-4 py-4 space-y-2">
-            {navItems.map((item) => (
-              <motion.button
-                key={item.id}
-                onClick={() => handleNavClick(item.id)}
-                className={`block w-full text-left px-4 py-3 rounded ${
-                  currentPage === item.id ? 'bg-white/10 text-white' : 'text-white/60'
-                }`}
-                whileTap={{ scale: 0.98 }}
-              >
-                {item.label}
-              </motion.button>
-            ))}
-          </div>
-        </motion.div>
-      )}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-black border-t border-white/10"
+          >
+            <div className="px-4 py-4 space-y-2">
+              {navItems.map((item) => (
+                <motion.button
+                  key={item.id}
+                  onClick={() => handleNavClick(item.id)}
+                  className={`block w-full text-left px-4 py-3 rounded ${
+                    currentPage === item.id ? 'bg-white/10 text-white' : 'text-white/60'
+                  }`}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {item.label}
+                </motion.button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }

@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
+import { usePageMeta } from '../kit';
 import { Shield, FileText, Lock, AlertCircle } from 'lucide-react';
 
 export function Terms() {
+  usePageMeta('Terms of Service', 'The terms that apply to services provided by Kemlok Technologies.');
+
   const sections = [
     {
       icon: FileText,
@@ -86,9 +89,9 @@ export function Terms() {
   ];
 
   return (
-    <div className="pt-20">
+    <div>
       {/* Hero Section */}
-      <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[40vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 pointer-events-none">
           <motion.div
             className="absolute top-10 right-10 w-60 h-60 border border-white/10"
@@ -108,7 +111,7 @@ export function Terms() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="text-5xl md:text-7xl mb-6 tracking-tight" style={{ fontFamily: 'Futura, Montserrat, sans-serif', fontWeight: 500, letterSpacing: '0.02em' }}>
+            <h1 className="text-4xl sm:text-[56px] leading-tight font-semibold mb-6 tracking-tight">
               Terms & Conditions
             </h1>
             <div className="w-20 h-1 bg-white mx-auto mb-8" />
@@ -128,7 +131,7 @@ export function Terms() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl mb-6" style={{ fontFamily: 'Futura, Montserrat, sans-serif', fontWeight: 500, letterSpacing: '0.02em' }}>Introduction</h2>
+            <h2 className="text-3xl mb-6">Introduction</h2>
             <p className="text-white/70 text-lg leading-relaxed mb-4">
               Welcome to Kemlok Technologies. These Terms and Conditions govern your use of
               our website and services. By accessing or using our services, you agree to
@@ -137,8 +140,8 @@ export function Terms() {
             <p className="text-white/70 text-lg leading-relaxed">
               Please read these terms carefully before using our services. If you have any
               questions about these terms, please contact us at{' '}
-              <a href="mailto:legal@kemlok.com" className="text-white hover:underline">
-                legal@kemlok.com
+              <a href="mailto:kemloktechnologies@gmail.com" className="text-white hover:underline">
+                kemloktechnologies@gmail.com
               </a>
               .
             </p>
@@ -165,13 +168,13 @@ export function Terms() {
                   <section.icon size={28} />
                 </motion.div>
                 <div>
-                  <h2 className="text-3xl md:text-4xl font-black tracking-tight">
+                  <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
                     {section.title}
                   </h2>
                 </div>
               </div>
 
-              <div className="space-y-8 pl-0 md:pl-22">
+              <div className="space-y-8 pl-0 md:pl-[5.5rem]">
                 {section.content.map((item, itemIndex) => (
                   <motion.div
                     key={itemIndex}
@@ -181,7 +184,7 @@ export function Terms() {
                     viewport={{ once: true }}
                     transition={{ delay: itemIndex * 0.05 }}
                   >
-                    <h3 className="text-xl font-black mb-3">{item.heading}</h3>
+                    <h3 className="text-xl font-semibold mb-3">{item.heading}</h3>
                     <p className="text-white/70 leading-relaxed">{item.text}</p>
                   </motion.div>
                 ))}
@@ -192,19 +195,19 @@ export function Terms() {
       </section>
 
       {/* Additional Information */}
-      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-white text-black">
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-paper text-on-paper">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl mb-8" style={{ fontFamily: 'Futura, Montserrat, sans-serif', fontWeight: 500, letterSpacing: '0.02em' }}>Additional Information</h2>
+            <h2 className="text-3xl mb-8">Additional Information</h2>
 
             <div className="space-y-6">
               <div>
-                <h3 className="text-xl font-black mb-3">15. Changes to Terms</h3>
-                <p className="text-black/70 leading-relaxed">
+                <h3 className="text-xl font-semibold mb-3">15. Changes to Terms</h3>
+                <p className="text-on-paper-muted leading-relaxed">
                   We reserve the right to update or modify these terms at any time without
                   prior notice. Your continued use of our services after any changes
                   constitutes acceptance of the new terms. We encourage you to review these
@@ -213,28 +216,28 @@ export function Terms() {
               </div>
 
               <div>
-                <h3 className="text-xl font-black mb-3">16. Contact Information</h3>
-                <p className="text-black/70 leading-relaxed mb-4">
+                <h3 className="text-xl font-semibold mb-3">16. Contact Information</h3>
+                <p className="text-on-paper-muted leading-relaxed mb-4">
                   If you have any questions about these Terms and Conditions, please contact
                   us:
                 </p>
-                <div className="space-y-2 text-black/70">
+                <div className="space-y-2 text-on-paper-muted">
                   <p>
-                    <span className="font-black">Email:</span> legal@kemlok.com
+                    <span className="font-semibold">Email:</span> kemloktechnologies@gmail.com
                   </p>
                   <p>
-                    <span className="font-black">Phone:</span> +1 (555) 123-4567
+                    <span className="font-semibold">Phone:</span> +1 (555) 123-4567
                   </p>
                   <p>
-                    <span className="font-black">Address:</span> 123 Innovation Street, San
+                    <span className="font-semibold">Address:</span> 123 Innovation Street, San
                     Francisco, CA 94103
                   </p>
                 </div>
               </div>
 
               <div>
-                <h3 className="text-xl font-black mb-3">17. Severability</h3>
-                <p className="text-black/70 leading-relaxed">
+                <h3 className="text-xl font-semibold mb-3">17. Severability</h3>
+                <p className="text-on-paper-muted leading-relaxed">
                   If any provision of these terms is found to be unenforceable or invalid,
                   that provision will be limited or eliminated to the minimum extent
                   necessary so that these terms will otherwise remain in full force and
@@ -243,8 +246,8 @@ export function Terms() {
               </div>
 
               <div>
-                <h3 className="text-xl font-black mb-3">18. Entire Agreement</h3>
-                <p className="text-black/70 leading-relaxed">
+                <h3 className="text-xl font-semibold mb-3">18. Entire Agreement</h3>
+                <p className="text-on-paper-muted leading-relaxed">
                   These terms constitute the entire agreement between you and Kemlok
                   Technologies regarding the use of our services, superseding any prior
                   agreements between you and Kemlok Technologies relating to your use of the
@@ -266,7 +269,7 @@ export function Terms() {
             viewport={{ once: true }}
           >
             <Shield size={48} className="mx-auto mb-6" />
-            <h2 className="text-2xl font-black mb-4">ACKNOWLEDGMENT</h2>
+            <h2 className="text-2xl font-semibold mb-4">Acknowledgement</h2>
             <p className="text-white/70 leading-relaxed max-w-2xl mx-auto">
               By using our services, you acknowledge that you have read, understood, and
               agree to be bound by these Terms and Conditions. Thank you for choosing Kemlok

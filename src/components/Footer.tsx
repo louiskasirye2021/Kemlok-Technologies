@@ -119,7 +119,7 @@ export function Footer({ setCurrentPage }: FooterProps) {
         </div>
 
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p className="text-white/40 text-sm"> 2025 Kemlok Technologies. All rights reserved.</p>
+          <p className="text-white/40 text-sm">© 2025 Kemlok Technologies. All rights reserved.</p>
           <div className="flex items-center space-x-4">
             <motion.button onClick={() => handleLinkClick('terms')} className="text-white/60 hover:text-white transition-colors text-sm" whileHover={{ scale: 1.05 }}>
               Terms & Conditions

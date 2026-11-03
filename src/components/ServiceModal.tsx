@@ -1,10 +1,12 @@
 import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect } from 'react';
 import { X } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 
 interface ServiceModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onGetInTouch: () => void;
   service: {
     title: string;
     icon: LucideIcon;
@@ -20,8 +22,15 @@ interface ServiceModalProps {
   };
 }
 
-export function ServiceModal({ isOpen, onClose, service }: ServiceModalProps) {
-  if (!isOpen) return null;
+export function ServiceModal({ isOpen, onClose, onGetInTouch, service }: ServiceModalProps) {
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
 
   return (
     <AnimatePresence>
@@ -37,7 +46,10 @@ export function ServiceModal({ isOpen, onClose, service }: ServiceModalProps) {
           />
 
           {/* Modal */}
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto"
+            onClick={onClose}
+          >
             <motion.div
               className="relative bg-black border-2 border-white w-full max-w-4xl max-h-[90vh] overflow-y-auto my-8"
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
@@ -49,6 +61,7 @@ export function ServiceModal({ isOpen, onClose, service }: ServiceModalProps) {
               {/* Close Button */}
               <button
                 onClick={onClose}
+                aria-label="Close"
                 className="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center border border-white/20 hover:bg-white hover:text-black transition-colors"
               >
                 <X size={24} />
@@ -122,10 +135,7 @@ export function ServiceModal({ isOpen, onClose, service }: ServiceModalProps) {
                   </p>
                   <button
                     className="w-full bg-white text-black py-4 font-black tracking-wide hover:bg-white/90 transition-colors"
-                    onClick={() => {
-                      onClose();
-                      // Navigate to contact page
-                    }}
+                    onClick={onGetInTouch}
                   >
                     GET IN TOUCH
                   </button>
