@@ -11,7 +11,7 @@ export type Service = {
   description: string;
   bestFor: string;
   offerings: { name: string; detail: string }[];
-  /** Optional, e.g. '2–4 weeks · from UGX 1,500,000'. Hidden while empty. */
+  /** Optional, e.g. '2 to 4 weeks · from UGX 1,500,000'. Hidden while empty. */
   pricing?: string;
 };
 
@@ -51,7 +51,7 @@ export const services: Service[] = [
     icon: Clapperboard,
     short: 'Product videos and ads produced with AI tools, faster and at lower cost than a shoot.',
     description:
-      'Short videos and visuals produced with AI tools — quicker and more affordable than a traditional shoot, and reviewed by our team before delivery.',
+      'Short videos and visuals produced with AI tools, which makes them quicker and more affordable than a traditional shoot. Our team reviews every piece before delivery.',
     bestFor: 'Product launches and regular social content.',
     offerings: [
       { name: 'Video ads', detail: 'Short ads made for social platforms' },

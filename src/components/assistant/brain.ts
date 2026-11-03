@@ -1,5 +1,5 @@
 import { processSteps, services, type Service } from '../../services';
-import { clients, mapLink, projects, site, whatsappLink } from '../../site';
+import { clients, mapLink, projects, site, whatsappLink, type Project } from '../../site';
 
 /**
  * The demo assistant's logic. It answers from the site's own content (services.ts and
@@ -101,9 +101,25 @@ const serviceKeywords: Record<string, string[]> = {
 
 const list = (items: string[]) => items.map((i) => `• ${i}`).join('\n');
 
+const projectKeywords: Record<string, string[]> = {
+  'Bampadde Terraces': ['bampadde', 'bampadde terrace', 'bar system', 'restaurant system'],
+  'Ehyeh Youth Foundation': ['ehyeh', 'youth foundation', 'foundation website', 'nonprofit', 'ngo website'],
+  'The Sports Lab Africa': ['sports lab', 'sport lab', 'sports platform', 'sports content'],
+  "Louis Lukoma's Portfolio": ['louis portfolio', 'portfolio website', 'portfolio site', 'voice agent demo'],
+};
+
+function projectAnswer(p: Project): Reply {
+  return {
+    text: `${p.client} (${p.type}): ${p.summary}\n\nWhat we built:\n${list(p.highlights)}\n\nBuilt with ${p.stack
+      .slice(0, -1)
+      .join(', ')} and ${p.stack[p.stack.length - 1]}.`,
+    link: p.url ? { label: 'Visit the site', href: p.url } : { label: 'See our work', href: '/#work' },
+  };
+}
+
 function serviceAnswer(s: Service): Reply {
   return {
-    text: `${s.title}: ${s.description}\n\nWhat's included:\n${list(s.offerings.map((o) => `${o.name} — ${o.detail}`))}\n\nBest for: ${s.bestFor}${
+    text: `${s.title}: ${s.description}\n\nWhat's included:\n${list(s.offerings.map((o) => `${o.name}: ${o.detail}`))}\n\nBest for: ${s.bestFor}${
       s.pricing ? `\nTypical engagement: ${s.pricing}` : ''
     }`,
     link: { label: `More about ${s.title}`, href: `/services#${s.id}` },
@@ -125,7 +141,7 @@ const intents: Intent[] = [
     answer: () => ({
       replies: [
         {
-          text: `We offer five services:\n${list(services.map((s) => `${s.title} — ${s.short}`))}\n\nAsk about any of them for details.`,
+          text: `We offer five services:\n${list(services.map((s) => `${s.title}: ${s.short}`))}\n\nAsk about any of them for details.`,
           link: { label: 'See all services', href: '/services' },
         },
       ],
@@ -149,7 +165,7 @@ const intents: Intent[] = [
     answer: () => ({
       replies: [
         {
-          text: `Our process has four steps:\n${processSteps.map((p, i) => `${i + 1}. ${p.title} — ${p.text}`).join('\n')}`,
+          text: `Our process has four steps:\n${processSteps.map((p, i) => `${i + 1}. ${p.title}: ${p.text}`).join('\n')}`,
         },
       ],
       chips: ['Book a consultation', 'How much does it cost?'],
@@ -172,7 +188,7 @@ const intents: Intent[] = [
     answer: () => ({
       replies: [
         {
-          text: `Some recent projects:\n${list(projects.map((p) => `${p.client} — ${p.type}`))}`,
+          text: `Some recent projects:\n${list(projects.map((p) => `${p.client}: ${p.type}`))}\n\nAsk about any of them for details.`,
           link: { label: 'See our work', href: '/#work' },
         },
       ],
@@ -256,7 +272,7 @@ const intents: Intent[] = [
     answer: () => ({
       replies: [
         {
-          text: `AI shows up in two of our services:\n• AI Content Production — product videos, ads and visuals made with AI tools and reviewed by our team.\n• IT Consultation — practical AI adoption: setting up AI tools, automating repetitive work and training your team.\n\nAssistants like me can be built for your business too.`,
+          text: `AI shows up in two of our services:\n• AI Content Production: product videos, ads and visuals made with AI tools and reviewed by our team.\n• IT Consultation: practical AI adoption, such as setting up AI tools, automating repetitive work and training your team.\n\nAssistants like me can be built for your business too.`,
         },
       ],
       chips: ['AI Content Production', 'IT Consultation', 'Book a consultation'],
@@ -307,6 +323,15 @@ function answer(message: string): Omit<Turn, 'state'> {
     }));
   }
   for (const intent of intents) consider(score(text, intent.phrases), intent.answer);
+
+  // A question naming one of our projects gets that project's details. Names count
+  // extra so "tell me about the Bampadde system" beats the general "work" answer.
+  for (const p of projects) {
+    consider(score(text, projectKeywords[p.client] ?? []) * 3, () => ({
+      replies: [projectAnswer(p)],
+      chips: ['Show me your work', 'Book a consultation'],
+    }));
+  }
 
   const found = best as { score: number; result: () => Omit<Turn, 'state'> } | null;
   if (found) return found.result();

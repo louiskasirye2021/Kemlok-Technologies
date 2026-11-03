@@ -40,7 +40,7 @@ export function About() {
     <>
       <PageIntro eyebrow="About Kemlok" title="We build practical software for businesses that are ready to grow.">
         Kemlok Technologies is a Kampala-based software and digital studio. We help small and medium-sized businesses
-        get the websites, systems and marketing that larger companies take for granted — at a price and pace that make
+        get the websites, systems and marketing that larger companies take for granted, at a price and pace that make
         sense for them.
       </PageIntro>
 
@@ -84,7 +84,7 @@ export function About() {
             </p>
             <p className="m-0 text-[17px] leading-[1.7] text-muted">
               I started Kemlok Technologies to close that gap. I've seen how the right digital tools can turn a
-              struggling business into a thriving one — and how many businesses are held back not by talent, but by
+              struggling business into a thriving one, and how many businesses are held back not by talent but by
               tools that are too expensive, too complicated, or built by someone who disappears after launch.
             </p>
             <p className="m-0 text-[17px] leading-[1.7] text-muted">
@@ -92,7 +92,7 @@ export function About() {
               long-term partnership: clear proposals, regular updates, and support after we hand over. We want to play
               our part in Uganda's digital transformation, one business at a time.
             </p>
-            <p className="m-0 font-display text-[17px] font-semibold">— Louis Lukoma</p>
+            <p className="m-0 font-display text-[17px] font-semibold">Louis Lukoma, Founder &amp; CEO</p>
           </Reveal>
         </div>
       </section>
@@ -103,7 +103,7 @@ export function About() {
           <Reveal className="flex flex-col gap-4 border-t-2 border-on-paper pt-7">
             <p className="eyebrow">Our mission</p>
             <h2 className="m-0 text-[26px] leading-snug font-semibold sm:text-[30px]">
-              To give growing businesses affordable, well-built digital tools — and the support to use them well.
+              To give growing businesses affordable, well-built digital tools and the support to use them well.
             </h2>
           </Reveal>
           <Reveal className="flex flex-col gap-4 border-t-2 border-on-paper pt-7" delay={0.15}>

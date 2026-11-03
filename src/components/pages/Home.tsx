@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, ExternalLink } from 'lucide-react';
+import { ArrowRight, Check, ExternalLink } from 'lucide-react';
 import { ButtonLink, CtaBand, Glow, ProcessSteps, SectionHeading, usePageMeta } from '../kit';
 import { ease, fadeUp, onMount, onScroll, Reveal, stagger, WordReveal } from '../motion';
 import { services } from '../../services';
@@ -29,8 +29,8 @@ export function Home() {
               className="m-0 max-w-xl text-lg leading-relaxed text-muted sm:text-[19px]"
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease, delay: 0.7 } } }}
             >
-              We design and build the tools that run your business online — booking systems, dashboards, websites and
-              brand identity — and we support them after launch.
+              We design and build the tools that run your business online, such as booking systems, dashboards,
+              websites and brand identity, and we support them after launch.
             </motion.p>
             <motion.div
               className="flex flex-wrap gap-3"
@@ -141,7 +141,7 @@ export function Home() {
             <motion.div variants={fadeUp} className="flex flex-col justify-center gap-3.5 bg-panel p-8 sm:p-9">
               <h3 className="m-0 text-[22px] font-semibold">Not sure where to start?</h3>
               <p className="m-0 leading-relaxed text-muted">
-                A first call is free. We'll tell you honestly what you need — and what you don't.
+                A first call is free. We'll tell you honestly what you need and what you don't.
               </p>
               <Link to="/contact" className="group inline-flex min-h-11 items-center gap-2 font-semibold">
                 Book a call{' '}
@@ -200,6 +200,24 @@ export function Home() {
                 <p className="eyebrow text-[13px]">{p.type}</p>
                 <h3 className="m-0 text-[22px] font-semibold">{p.client}</h3>
                 <p className="m-0 leading-relaxed text-on-paper-muted">{p.summary}</p>
+                <div className="flex flex-col gap-2.5">
+                  <p className="m-0 text-sm font-semibold">What we built</p>
+                  <ul className="m-0 flex list-none flex-col gap-2 p-0">
+                    {p.highlights.map((h) => (
+                      <li key={h} className="flex gap-2.5 text-[15px] leading-relaxed text-on-paper-muted">
+                        <Check size={16} strokeWidth={2.4} aria-hidden="true" className="mt-1 shrink-0 text-on-paper" />
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <ul aria-label="Technologies used" className="m-0 flex list-none flex-wrap gap-2 p-0">
+                  {p.stack.map((t) => (
+                    <li key={t} className="rounded-full border border-on-paper/15 px-3 py-1 text-[13px] text-on-paper-subtle">
+                      {t}
+                    </li>
+                  ))}
+                </ul>
                 {p.url && (
                   <a
                     href={p.url}
@@ -252,7 +270,7 @@ export function Home() {
               >
                 <blockquote className="m-0 font-display text-[22px] leading-normal">“{t.quote}”</blockquote>
                 <figcaption className="text-[15px] text-muted">
-                  {t.name}, {t.role} — {t.organisation}
+                  {t.name}, {t.role} at {t.organisation}
                 </figcaption>
               </motion.figure>
             ))}

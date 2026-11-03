@@ -55,7 +55,12 @@ function PageTransition({ children }: { children: ReactNode }) {
 function ScrollProgress() {
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 140, damping: 30, restDelta: 0.001 });
-  return <motion.div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-0.5 origin-left bg-fg" style={{ scaleX }} />;
+  // The spring can overshoot past 100%, so the bar sits in a clipped track to stay within the page width.
+  return (
+    <div aria-hidden="true" className="absolute inset-x-0 bottom-0 h-0.5 overflow-hidden">
+      <motion.div className="h-full origin-left bg-fg" style={{ scaleX }} />
+    </div>
+  );
 }
 
 function Header() {

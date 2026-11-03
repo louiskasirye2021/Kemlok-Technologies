@@ -8,7 +8,7 @@ import { ease, fadeUp, onScroll, Reveal, stagger } from '../motion';
 import { services } from '../../services';
 import { mapEmbed, mapLink, site, whatsappLink } from '../../site';
 
-const budgets = ['Under UGX 2M', 'UGX 2M – 5M', 'UGX 5M – 15M', 'Over UGX 15M', 'Not sure yet'];
+const budgets = ['Under UGX 2M', 'UGX 2M to 5M', 'UGX 5M to 15M', 'Over UGX 15M', 'Not sure yet'];
 
 const emptyForm = { name: '', company: '', email: '', phone: '', service: '', budget: '', message: '' };
 
@@ -167,7 +167,7 @@ export function Contact() {
               )}
               {status === 'sent' && sentBy === 'server' && (
                 <Notice key="sent-server" className="m-0 rounded-md border border-[#4f8a5b] bg-[#122416] px-4 py-3 text-[15px] text-[#c4e8cb]">
-                  Thank you — your message has been sent. We'll reply within 24 hours.
+                  Thank you! Your message has been sent. We'll reply within 24 hours.
                 </Notice>
               )}
               {status === 'sent' && sentBy === 'whatsapp' && (

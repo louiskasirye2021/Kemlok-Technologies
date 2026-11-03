@@ -26,7 +26,7 @@ export const site = {
   whatsapp: '+256 772 661 072',
   whatsappNumber: '256772661072',
   address: '4C Kimirante Road, Komamboga, Kampala',
-  officeHours: '', // e.g. 'Mon–Fri, 8:00–17:00' — hidden while empty
+  officeHours: '', // e.g. 'Mon to Fri, 8:00 to 17:00'; hidden while empty
 
   // Shown in the footer and on the About page once filled in.
   registrationNumber: '', // URSB registration number
@@ -68,6 +68,10 @@ export type Project = {
   client: string;
   type: string;
   summary: string;
+  /** What we built, as short points */
+  highlights: string[];
+  /** Main technologies used */
+  stack: string[];
   url?: string;
   /** Screenshot of the work. Without one, the client's logo is shown instead. */
   image?: string;
@@ -79,7 +83,15 @@ export const projects: Project[] = [
     client: 'Bampadde Terraces',
     type: 'Point of sale · Business system',
     summary:
-      'A custom point-of-sale system running a busy bar and restaurant in Komamboga: orders and tables, cash reconciliation, credit sales, stock, staff and daily reports.',
+      'A custom point-of-sale system that runs a busy bar and restaurant in Komamboga, from taking orders at the table to closing the day with a full report.',
+    highlights: [
+      'PIN login for staff, with admin-only controls enforced on the server',
+      'Orders by table, with table transfers, merged tables and split bills by item or quantity',
+      'Stock that updates the moment an item is sold, with a complete history of every movement',
+      'Day sessions that end with an automatic report of sales, payment methods and stock used',
+      'Credit sales, suppliers, purchase orders, expenses and damaged stock in one place',
+    ],
+    stack: ['Node.js', 'Express', 'SQLite', 'TypeScript'],
     image: asset('work/bampadde-pos.jpg'),
     logo: clientByName('Bampadde Terraces'),
   },
@@ -87,7 +99,14 @@ export const projects: Project[] = [
     client: 'Ehyeh Youth Foundation',
     type: 'Nonprofit website · Content admin',
     summary:
-      "A live website for a youth foundation, with its own admin section so the team can update content without a developer.",
+      'A live website for a youth foundation, with its own admin section so the team can keep it up to date without a developer.',
+    highlights: [
+      'Pages for programmes, a photo gallery, a blog, the team and testimonials',
+      'Online registration for the foundation’s programmes',
+      'An admin dashboard to manage every section, from blog posts to gallery photos',
+      'Contact messages delivered straight to the foundation by email',
+    ],
+    stack: ['React', 'Supabase', 'EmailJS', 'Tailwind CSS'],
     url: 'https://ehyehyouthfoundation.org',
     image: asset('work/ehyeh-website.jpg'),
     logo: clientByName('Ehyeh Youth Foundation'),
@@ -96,18 +115,31 @@ export const projects: Project[] = [
     client: 'The Sports Lab Africa',
     type: 'Sports content platform',
     summary:
-      'A sports content platform for fans, creators and sponsors, with live comments and role-based dashboards. Built with the Refactory Academy team.',
+      'A sports storytelling platform that brings fans, creators and sponsors together. Built with the Refactory Academy team.',
+    highlights: [
+      'Live streams with real-time comments, plus match videos, stories and playlists',
+      'Creator dashboards with analytics, earnings and a leaderboard',
+      'Content licensing, sponsorship campaigns and events',
+      'Payments at checkout, notifications and messaging between users',
+    ],
+    stack: ['React', 'Django REST Framework', 'Mux video', 'Ably realtime'],
     image: asset('work/sports-lab.jpg'),
   },
   {
-    client: 'Louis Lukoma — Portfolio',
+    client: "Louis Lukoma's Portfolio",
     type: 'Portfolio website',
     summary:
-      'A personal portfolio site for a full-stack developer, featuring an interactive demo of an AI voice agent that answers questions and books calls.',
+      'A personal portfolio site for a full-stack developer, built around a live demo of an AI voice agent that answers questions and books calls.',
+    highlights: [
+      'An interactive AI voice agent demo on the home page',
+      'Project cards with detailed write-ups and a full-screen screenshot viewer',
+      'A live Kampala clock, a light and dark theme, and smooth scrolling',
+    ],
+    stack: ['HTML', 'CSS', 'JavaScript', 'Netlify'],
     url: 'https://louis-lukoma-portfolio.netlify.app',
     image: asset('work/portfolio.jpg'),
   },
-  // Add more case studies here: { client, type, summary, url?, image?, logo? }
+  // Add more case studies here: { client, type, summary, highlights, stack, url?, image?, logo? }
 ];
 
 export type Testimonial = { quote: string; name: string; role: string; organisation: string };
