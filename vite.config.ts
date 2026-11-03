@@ -7,11 +7,8 @@ export default defineConfig({
   base: '/',
   plugins: [react(), tailwindcss()],
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
     alias: {
       '@': path.resolve(__dirname, './src'),
-      'figma:asset/d0162c32edc73cb1120e888914e12eeb1707090d.png': path.resolve(__dirname, './src/assets/d0162c32edc73cb1120e888914e12eeb1707090d.png'),
-      'figma:asset/cc572572013fed7ea1d15352963344bd1131bddf.png': path.resolve(__dirname, './src/assets/cc572572013fed7ea1d15352963344bd1131bddf.png'),
     },
   },
   build: {

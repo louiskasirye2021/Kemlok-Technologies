@@ -117,7 +117,11 @@ export function PageIntro({ eyebrow, title, children }: { eyebrow: string; title
 /** Soft, slowly drifting light behind the top of a page. Purely decorative. */
 export function Glow() {
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+    // The mask fades the glow out towards the bottom so the section edge doesn't cut it off sharply.
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 overflow-hidden [mask-image:linear-gradient(to_bottom,black_55%,transparent)]"
+    >
       <motion.div
         className="absolute -top-40 -right-32 size-[34rem] rounded-full bg-white/[0.06] blur-3xl"
         animate={{ x: [0, -60, 0], y: [0, 40, 0], scale: [1, 1.15, 1] }}

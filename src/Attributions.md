@@ -1,3 +1,3 @@
-This Figma Make file includes components from [shadcn/ui](https://ui.shadcn.com/) used under [MIT license](https://github.com/shadcn-ui/ui/blob/main/LICENSE.md).
+Icons from [Lucide](https://lucide.dev) are used under the [ISC license](https://lucide.dev/license).
 
-This Figma Make file includes photos from [Unsplash](https://unsplash.com) used under [license](https://unsplash.com/license).
+Social media logos are from [Simple Icons](https://simpleicons.org), released under [CC0](https://github.com/simple-icons/simple-icons/blob/develop/LICENSE.md). Each logo remains a trademark of its owner.

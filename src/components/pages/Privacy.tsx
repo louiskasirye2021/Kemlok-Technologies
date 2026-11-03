@@ -1,81 +1,58 @@
-import { motion } from 'framer-motion';
-import { usePageMeta } from '../kit';
-import { Shield } from 'lucide-react';
+import { Download, ExternalLink } from 'lucide-react';
+import { PageIntro, usePageMeta } from '../kit';
+import { Reveal } from '../motion';
 import { site } from '../../site';
+
+const LAST_UPDATED = 'November 21, 2025';
+const PDF = '/Privacy%20Policy.pdf';
 
 export function Privacy() {
   usePageMeta('Privacy Policy', 'How Kemlok Technologies collects, uses and protects your personal information.');
 
   return (
-    <div>
-      {/* Hero Section */}
-      <section className="relative min-h-[40vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 pointer-events-none">
-          <motion.div
-            className="absolute top-10 right-10 w-60 h-60 border border-white/10"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-          />
-          <motion.div
-            className="absolute bottom-10 left-10 w-40 h-40 border border-white/5 rounded-full"
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ duration: 10, repeat: Infinity }}
-          />
-        </div>
+    <>
+      <PageIntro eyebrow={`Legal · Last updated ${LAST_UPDATED}`} title="Privacy Policy">
+        How we collect, use and protect your personal information. The full policy is below as a PDF.
+      </PageIntro>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-4xl sm:text-[56px] leading-tight font-semibold mb-6 tracking-tight">
-              Privacy Policy
-            </h1>
-            <div className="w-20 h-1 bg-white mx-auto mb-8" />
-            <p className="text-xl text-white/60 max-w-3xl mx-auto">
-              Last updated: November 21, 2025
+      <section>
+        <div className="container-page flex flex-col gap-10 pb-24">
+          <Reveal className="flex flex-wrap gap-3">
+            <a
+              href={PDF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-12 items-center gap-2 rounded-md bg-fg px-6 font-semibold text-ink no-underline transition-colors hover:bg-white"
+            >
+              Read the full policy <ExternalLink size={17} aria-hidden="true" />
+            </a>
+            <a
+              href={PDF}
+              download="Kemlok Technologies Privacy Policy.pdf"
+              className="inline-flex min-h-12 items-center gap-2 rounded-md border border-field px-6 font-semibold text-fg no-underline transition-colors hover:border-fg"
+            >
+              Download PDF <Download size={17} aria-hidden="true" />
+            </a>
+          </Reveal>
+
+          {/* Phone browsers often can't show a PDF inside a page, so the viewer is for larger screens only. */}
+          <Reveal className="hidden overflow-hidden rounded-xl border border-line-strong bg-panel md:block">
+            <iframe src={PDF} title="Privacy Policy" className="block h-[80vh] w-full border-0" />
+          </Reveal>
+
+          <Reveal className="rounded-xl border border-line-strong bg-ink-raised p-8">
+            <h2 className="m-0 mb-3 text-xl font-semibold">Questions about your data?</h2>
+            <p className="m-0 leading-relaxed text-muted">
+              By using our services, you acknowledge that you have read and understood our Privacy Policy. To ask about,
+              correct or delete the information we hold about you, contact us at{' '}
+              <a href={`mailto:${site.email}`} className="text-fg">
+                {site.email}
+              </a>{' '}
+              or on WhatsApp at {site.whatsapp}.
             </p>
-          </motion.div>
+          </Reveal>
         </div>
       </section>
-
-      {/* PDF Embed */}
-      <section className="py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto">
-          <motion.div
-            className="border border-white/20 p-4 md:p-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-2xl font-semibold mb-4">Full Privacy Policy</h2>
-            <p className="text-white/70 mb-6">The full privacy policy is embedded below. You can also <a href="/Privacy%20Policy.pdf" className="text-white hover:underline" target="_blank" rel="noopener noreferrer">download the PDF</a>.</p>
-
-            <div className="w-full h-[70vh] bg-black border border-white/10">
-              <iframe src="/Privacy%20Policy.pdf" title="Privacy Policy" className="w-full h-full" />
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Acknowledgment */}
-      <section className="py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            className="border-2 border-white/20 p-8 md:p-12 text-center"
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-          >
-            <Shield size={48} className="mx-auto mb-6" />
-            <h2 className="text-2xl font-semibold mb-4">Acknowledgement</h2>
-            <p className="text-white/70 leading-relaxed max-w-2xl mx-auto">
-              By using our services, you acknowledge that you have read and understood our Privacy Policy. If you have questions about our privacy practices, please contact us at <a href={`mailto:${site.email}`} className="text-white hover:underline">{site.email}</a>.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-    </div>
+    </>
   );
 }

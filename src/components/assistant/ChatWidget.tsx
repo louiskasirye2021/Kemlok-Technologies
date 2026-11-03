@@ -159,11 +159,20 @@ export function ChatWidget() {
     return () => window.removeEventListener(OPEN_EVENT, onOpen);
   }, [show, send]);
 
-  // A gentle prompt after a few seconds, once per visit.
+  // A gentle prompt after a few seconds, once per visit. It hides itself again so it
+  // doesn't sit over the page content on small screens.
   useEffect(() => {
     if (readFlag(NUDGE_KEY)) return;
-    const t = setTimeout(() => setNudge(true), 6000);
-    return () => clearTimeout(t);
+    let hideTimer: ReturnType<typeof setTimeout> | undefined;
+    const showTimer = setTimeout(() => {
+      setNudge(true);
+      setFlag(NUDGE_KEY);
+      hideTimer = setTimeout(() => setNudge(false), 8000);
+    }, 6000);
+    return () => {
+      clearTimeout(showTimer);
+      clearTimeout(hideTimer);
+    };
   }, []);
 
   // Keep the newest message in view.

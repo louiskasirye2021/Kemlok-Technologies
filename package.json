@@ -1,17 +1,13 @@
 {
-  "name": "modern-black-and-white-website",
+  "name": "kemlok-technologies",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@radix-ui/react-slot": "^1.0.0",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
     "framer-motion": "^10.12.4",
     "lucide-react": "^0.554.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.30.6",
-    "tailwind-merge": "^3.4.0"
+    "react-router-dom": "^7.18.5"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.4",
